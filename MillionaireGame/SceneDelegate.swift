@@ -16,11 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        
-        let viewController = ViewController()
-        viewController.view.backgroundColor = .blue
-        
-        window?.rootViewController = viewController
+        window?.rootViewController = StartMenuVC()
         window?.makeKeyAndVisible()
     }
 
