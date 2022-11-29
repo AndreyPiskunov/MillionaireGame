@@ -17,11 +17,11 @@ class ResultVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBackgroundView()
+        setupView()
     }
     //MARK: - Methods
     
-    func setupBackgroundView() {
+    func setupView() {
         resultBackgroundView = UIView(frame: self.view.bounds)
         resultBackgroundView.backgroundColor = .white
         view.addSubview(resultBackgroundView)

@@ -20,14 +20,16 @@ class StartMenuVC: UIViewController {
         super.viewDidLoad()
         
         setupBackgroundView()
+        setupView()
         setupButtons()
+
     }
     //MARK: - Methods
     
     func setupBackgroundView() {
+        
         backgroundView = UIView(frame: self.view.bounds)
         backgroundView.backgroundColor = .white
-        view.addSubview(backgroundView)
     }
     
     func setupButtons() {
@@ -39,7 +41,6 @@ class StartMenuVC: UIViewController {
         playButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         playButton.tintColor = .black
         playButton.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
-        view.addSubview(playButton)
         
         resultButton.layer.cornerRadius = 10
         resultButton.frame = CGRect(x: 220, y: 650, width: 150, height: 70)
@@ -48,6 +49,12 @@ class StartMenuVC: UIViewController {
         resultButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         resultButton.tintColor = .black
         resultButton.addTarget(self, action: #selector(tapResultButton), for: .touchUpInside)
+    }
+    
+    func setupView() {
+        
+        view.addSubview(backgroundView)
+        view.addSubview(playButton)
         view.addSubview(resultButton)
     }
     
