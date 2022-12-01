@@ -10,14 +10,17 @@ import UIKit
 class GameVC: UIViewController {
     //MARK: - Properties
     
-    var gameBackgroundView = UIView()
-    var answerStack = UIStackView()
-    var answerButtonA = UIButton()
-    var answerButtonB = UIButton()
-    var answerButtonC = UIButton()
-    var answerButtonD = UIButton()
-    var questionLabel = UILabel()
-
+    private lazy var gameBackgroundView = UIView()
+    private lazy var answerStack = UIStackView()
+    private lazy var answerButtonA = UIButton()
+    private lazy var answerButtonB = UIButton()
+    private lazy var answerButtonC = UIButton()
+    private lazy var answerButtonD = UIButton()
+    private lazy var questionLabel = UILabel()
+    
+    let questions = Questions.testQuestions
+    var questionNumber = 0
+    var truth = ""
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -25,19 +28,24 @@ class GameVC: UIViewController {
         
         setupGameBackgroundView()
         setupQuestionLabel()
-        setupStackView()
+        setupAnswerStackView()
+        
+        setActionForButtons()
+        setTextQuestion(questionNumber)
+        setTextButtons(questionNumber)
+        setTruth(questionNumber)
     }
     //MARK: - Methods
     
     func setupGameBackgroundView() {
+        
         gameBackgroundView = UIView(frame: self.view.bounds)
         gameBackgroundView.backgroundColor = .white
         view.addSubview(gameBackgroundView)
     }
     
     func setupQuestionLabel() {
-       
-        questionLabel.text = "Какие цвета есть на логотипе Coca-Cola?"
+        
         questionLabel.font = UIFont.systemFont(ofSize: 25)
         questionLabel.textAlignment = .center
         questionLabel.textColor = .black
@@ -47,7 +55,7 @@ class GameVC: UIViewController {
         setupQuestionLabelConstraints()
     }
     
-    func setupStackView() {
+    func setupAnswerStackView() {
         
         answerStack.axis = .vertical
         answerStack.distribution = .fillEqually
@@ -60,32 +68,16 @@ class GameVC: UIViewController {
     
     func addButtonsToStackView() {
         
-        let button1 = answerButtonA
-        button1.setTitle("1", for: .normal)
-        button1.backgroundColor = .lightGray
-        button1.layer.cornerRadius = 12
-        answerStack.addArrangedSubview(button1)
-        
-        let button2 = answerButtonB
-        button2.setTitle("2", for: .normal)
-        button2.backgroundColor = .lightGray
-        button2.layer.cornerRadius = 12
-        answerStack.addArrangedSubview(button2)
-        
-        let button3 = answerButtonC
-        button3.setTitle("3", for: .normal)
-        button3.backgroundColor = .lightGray
-        button3.layer.cornerRadius = 12
-        answerStack.addArrangedSubview(button3)
-        
-        let button4 = answerButtonD
-        button4.setTitle("4", for: .normal)
-        button4.backgroundColor = .lightGray
-        button4.layer.cornerRadius = 12
-        answerStack.addArrangedSubview(button4)
+        let arrayAnswerButtons = [answerButtonA, answerButtonB, answerButtonC, answerButtonD]
+        for arrayButton in arrayAnswerButtons {
+            arrayButton.backgroundColor = .lightGray
+            arrayButton.layer.cornerRadius = 12
+            answerStack.addArrangedSubview(arrayButton)
+        }
     }
     
     func setupQuestionLabelConstraints() {
+        
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150).isActive = true
         questionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
@@ -93,10 +85,64 @@ class GameVC: UIViewController {
     }
     
     func setupStackViewConstraints() {
+        
         answerStack.translatesAutoresizingMaskIntoConstraints = false
         answerStack.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 150).isActive = true
         answerStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
         answerStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40).isActive = true
         answerStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+    }
+    //MARK: - Private methods
+    
+    private func setTextQuestion(_ questionNumber: Int) {
+        let question = questions[questionNumber]
+        questionLabel.text = question.question
+    }
+    
+    private func setTextButtons(_ questionNumber: Int) {
+        let question = questions[questionNumber]
+        var answerNum = 0
+        answerStack.subviews.forEach { button in
+            guard let button = button as? UIButton else { return }
+            button.setTitle(question.aunswers[answerNum].text, for: .normal)
+            answerNum += 1
+        }
+    }
+    
+    private func setTruth(_ questionNumber: Int) {
+        let answers = questions[questionNumber].aunswers
+        answers.forEach { answer in
+            if answer.truth {
+                truth = answer.text
+            }
+        }
+    }
+    
+    private func setActionForButtons() {
+        answerStack.subviews.forEach { button in
+            guard let button = button as? UIButton else { return }
+            button.addTarget(self, action: #selector(buttonsAction), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func buttonsAction(_ sender: UIButton) {
+        guard let text = sender.currentTitle else { return }
+        if truth == text {
+            nextQuestions()
+        } else {
+            endGame()
+        }
+    }
+    
+    private func nextQuestions() {
+        questionNumber += 1
+        guard questionNumber < questions.count else { endGame(); return }
+        setTextQuestion(questionNumber)
+        setTextButtons(questionNumber)
+        setTruth(questionNumber)
+    }
+    
+    private func endGame() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

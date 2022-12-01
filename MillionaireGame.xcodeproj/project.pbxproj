@@ -15,6 +15,8 @@
 		CE47C6F72934033D004DDCDD /* StartMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47C6F62934033D004DDCDD /* StartMenuVC.swift */; };
 		CE47C6F929340357004DDCDD /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47C6F829340357004DDCDD /* GameVC.swift */; };
 		CE58E6AA29352E6900D59B79 /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58E6A929352E6900D59B79 /* ResultVC.swift */; };
+		CE58E6AC2937C0A800D59B79 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58E6AB2937C0A800D59B79 /* Game.swift */; };
+		CE58E6AE2937C30500D59B79 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58E6AD2937C30500D59B79 /* GameSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		CE47C6F62934033D004DDCDD /* StartMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuVC.swift; sourceTree = "<group>"; };
 		CE47C6F829340357004DDCDD /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		CE58E6A929352E6900D59B79 /* ResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
+		CE58E6AB2937C0A800D59B79 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		CE58E6AD2937C30500D59B79 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				CE47C6F32933F944004DDCDD /* Question.swift */,
+				CE58E6AB2937C0A800D59B79 /* Game.swift */,
+				CE58E6AD2937C30500D59B79 /* GameSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +167,8 @@
 			files = (
 				CE47C6F72934033D004DDCDD /* StartMenuVC.swift in Sources */,
 				CE58E6AA29352E6900D59B79 /* ResultVC.swift in Sources */,
+				CE58E6AE2937C30500D59B79 /* GameSession.swift in Sources */,
+				CE58E6AC2937C0A800D59B79 /* Game.swift in Sources */,
 				CE47C6F42933F944004DDCDD /* Question.swift in Sources */,
 				CE47C6DF2933E5C1004DDCDD /* AppDelegate.swift in Sources */,
 				CE47C6F929340357004DDCDD /* GameVC.swift in Sources */,
