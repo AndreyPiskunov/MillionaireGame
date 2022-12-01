@@ -12,5 +12,12 @@ final class Game {
     
     var session: GameSession?
     
+    var results: [Result] = []
+    
     private init() {}
+    
+    func saveResult(_ record: Result) {
+        self.results.append(record)
+    }
+    
 }

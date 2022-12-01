@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameVC: UIViewController {
+final class GameVC: UIViewController {
     //MARK: - Properties
     
     private lazy var gameBackgroundView = UIView()
@@ -18,6 +18,7 @@ class GameVC: UIViewController {
     private lazy var answerButtonD = UIButton()
     private lazy var questionLabel = UILabel()
     
+    let session = GameSession()
     let questions = Questions.testQuestions
     var questionNumber = 0
     var truth = ""
@@ -25,8 +26,7 @@ class GameVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let session = GameSession()
+    
         session.gameVCDelegate = self
         Game.shared.session = session
         
@@ -46,15 +46,15 @@ class GameVC: UIViewController {
     func setupGameBackgroundView() {
         
         gameBackgroundView = UIView(frame: self.view.bounds)
-        gameBackgroundView.backgroundColor = .white
+        gameBackgroundView.backgroundColor = AppColors.backgroundGame
         view.addSubview(gameBackgroundView)
     }
     
     func setupQuestionLabel() {
         
-        questionLabel.font = UIFont.systemFont(ofSize: 25)
+        questionLabel.font = UIFont.systemFont(ofSize: 28)
         questionLabel.textAlignment = .center
-        questionLabel.textColor = .black
+        questionLabel.textColor = AppColors.textQestion
         questionLabel.numberOfLines = 0
         view.addSubview(questionLabel)
         
@@ -76,7 +76,8 @@ class GameVC: UIViewController {
         
         let arrayAnswerButtons = [answerButtonA, answerButtonB, answerButtonC, answerButtonD]
         for arrayButton in arrayAnswerButtons {
-            arrayButton.backgroundColor = .lightGray
+            arrayButton.backgroundColor = AppColors.buttonsGame
+            arrayButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             arrayButton.layer.cornerRadius = 12
             answerStack.addArrangedSubview(arrayButton)
         }
@@ -150,16 +151,20 @@ class GameVC: UIViewController {
     }
     
     private func endGame() {
+        let result = Result(counterCorrectAnswers: session.counterCorrectAnswers,
+                            counterAllQuestions: session.counterAllQuestions)
+        Game.shared.saveResult(result)
+        Game.shared.session = nil
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension GameVC: GameVCDelegate {
     func scorePoints(_ points: Int = 1) {
-        Game.shared.session?.counterCorrectAnswers += points
+        session.counterCorrectAnswers += points
     }
     
     func setAllQuestionsCount(_ count: Int) {
-        Game.shared.session?.counterAllQuestions = count
+        session.counterAllQuestions = count
     }
 }

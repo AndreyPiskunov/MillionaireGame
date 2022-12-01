@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StartMenuVC: UIViewController {
+final class StartMenuVC: UIViewController {
     //MARK: - Properties
     
     private lazy var backgroundView = UIView()
@@ -30,7 +30,7 @@ class StartMenuVC: UIViewController {
     func setupBackgroundView() {
         
         backgroundView = UIView(frame: self.view.bounds)
-        backgroundView.backgroundColor = .white
+        backgroundView.backgroundColor = AppColors.backgroundGame
         view.addSubview(backgroundView)
     }
 
@@ -59,9 +59,9 @@ class StartMenuVC: UIViewController {
         
         let arrayMenuButtons = [playButton, resultButton]
         for arrayMenuButton in arrayMenuButtons {
-            arrayMenuButton.backgroundColor = .lightGray
+            arrayMenuButton.backgroundColor = AppColors.buttonsMenu
             arrayMenuButton.tintColor = .black
-            arrayMenuButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+            arrayMenuButton.titleLabel?.font = UIFont.systemFont(ofSize: 24)
             arrayMenuButton.layer.cornerRadius = 12
             buttonStack.addArrangedSubview(arrayMenuButton)
         }
