@@ -26,6 +26,12 @@ class GameVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let session = GameSession()
+        session.gameVCDelegate = self
+        Game.shared.session = session
+        
+        setAllQuestionsCount(questions.count)
+        
         setupGameBackgroundView()
         setupQuestionLabel()
         setupAnswerStackView()
@@ -128,6 +134,7 @@ class GameVC: UIViewController {
     @objc private func buttonsAction(_ sender: UIButton) {
         guard let text = sender.currentTitle else { return }
         if truth == text {
+            scorePoints()
             nextQuestions()
         } else {
             endGame()
@@ -144,5 +151,15 @@ class GameVC: UIViewController {
     
     private func endGame() {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension GameVC: GameVCDelegate {
+    func scorePoints(_ points: Int = 1) {
+        Game.shared.session?.counterCorrectAnswers += points
+    }
+    
+    func setAllQuestionsCount(_ count: Int) {
+        Game.shared.session?.counterAllQuestions = count
     }
 }
