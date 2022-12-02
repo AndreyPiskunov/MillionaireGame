@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE042AB2293A332B00D13551 /* ResultCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE042AB1293A332B00D13551 /* ResultCaretaker.swift */; };
 		CE47C6DF2933E5C1004DDCDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47C6DE2933E5C1004DDCDD /* AppDelegate.swift */; };
 		CE47C6E12933E5C1004DDCDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47C6E02933E5C1004DDCDD /* SceneDelegate.swift */; };
 		CE47C6E82933E5C3004DDCDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE47C6E72933E5C3004DDCDD /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE042AB1293A332B00D13551 /* ResultCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCaretaker.swift; sourceTree = "<group>"; };
 		CE47C6DB2933E5C1004DDCDD /* MillionaireGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillionaireGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE47C6DE2933E5C1004DDCDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE47C6E02933E5C1004DDCDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				CE58E6AB2937C0A800D59B79 /* Game.swift */,
 				CE58E6AD2937C30500D59B79 /* GameSession.swift */,
 				CE8D2FF02938DC08007AD5A6 /* Result.swift */,
+				CE042AB1293A332B00D13551 /* ResultCaretaker.swift */,
 				CE8D2FF229390A9B007AD5A6 /* AppColors.swift */,
 			);
 			path = Model;
@@ -173,6 +176,7 @@
 			files = (
 				CE8D2FF12938DC08007AD5A6 /* Result.swift in Sources */,
 				CE47C6F72934033D004DDCDD /* StartMenuVC.swift in Sources */,
+				CE042AB2293A332B00D13551 /* ResultCaretaker.swift in Sources */,
 				CE58E6AA29352E6900D59B79 /* ResultVC.swift in Sources */,
 				CE8D2FF329390A9B007AD5A6 /* AppColors.swift in Sources */,
 				CE58E6AE2937C30500D59B79 /* GameSession.swift in Sources */,

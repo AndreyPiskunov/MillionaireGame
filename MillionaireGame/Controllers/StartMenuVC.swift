@@ -44,6 +44,17 @@ final class StartMenuVC: UIViewController {
         view.addSubview(resultButton)
     }
     
+    @objc func tapPlayButton() {
+        let gameViewController = GameVC()
+        gameViewController.modalPresentationStyle = .fullScreen
+        present(gameViewController, animated: true)
+    }
+    
+    @objc func tapResultButton() {
+        let resultViewController = ResultVC()
+        present(resultViewController, animated: true)
+    }
+    
     func setupButtonStackView() {
         
         buttonStack.axis = .vertical
@@ -68,6 +79,7 @@ final class StartMenuVC: UIViewController {
     }
     
     func setupButtonStackConstraints() {
+        
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         buttonStack.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -75,16 +87,4 @@ final class StartMenuVC: UIViewController {
         buttonStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40).isActive = true
         buttonStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -300).isActive = true
     }
-    
-    @objc func tapPlayButton() {
-        let gameViewController = GameVC()
-        gameViewController.modalPresentationStyle = .fullScreen
-        present(gameViewController, animated: true)
-    }
-    
-    @objc func tapResultButton() {
-        let resultViewController = ResultVC()
-        present(resultViewController, animated: true)
-    }
 }
-

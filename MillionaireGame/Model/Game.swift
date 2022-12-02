@@ -8,16 +8,21 @@
 import Foundation
 
 final class Game {
-    static let shared = Game()
     
+    static let shared = Game()
     var session: GameSession?
     
-    var results: [Result] = []
+    private(set) var results: [Result] {
+        didSet { resultCareTaker.saveResult(result: self.results)
+        }
+    }
     
-    private init() {}
+    private let resultCareTaker = ResultCaretaker()
+    private init() {
+        self.results = self.resultCareTaker.retrieveResult()
+    }
     
     func saveResult(_ record: Result) {
         self.results.append(record)
     }
-    
 }
