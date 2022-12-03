@@ -18,5 +18,4 @@ class GameSession {
     
     var counterCorrectAnswers: Int = 0
     var counterAllQuestions: Int = 0
-    
 }

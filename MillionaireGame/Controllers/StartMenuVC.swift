@@ -14,6 +14,7 @@ final class StartMenuVC: UIViewController {
     private lazy var playButton = UIButton()
     private lazy var resultButton = UIButton()
     private lazy var buttonStack = UIStackView()
+    private lazy var settingsButton = UIButton()
     
     //MARK: - Lifecycle
     
@@ -42,6 +43,10 @@ final class StartMenuVC: UIViewController {
         resultButton.setTitle("Результаты", for: .normal)
         resultButton.addTarget(self, action: #selector(tapResultButton), for: .touchUpInside)
         view.addSubview(resultButton)
+        
+        settingsButton.setTitle("Настройки", for: .normal)
+        settingsButton.addTarget(self, action: #selector(tapSettingsButton), for: .touchUpInside)
+        view.addSubview(settingsButton)
     }
     
     @objc func tapPlayButton() {
@@ -53,6 +58,11 @@ final class StartMenuVC: UIViewController {
     @objc func tapResultButton() {
         let resultViewController = ResultVC()
         present(resultViewController, animated: true)
+    }
+    
+    @objc func tapSettingsButton() {
+        let settingsViewController = SettingsMenuVC()
+        present(settingsViewController, animated: true)
     }
     
     func setupButtonStackView() {
@@ -68,7 +78,7 @@ final class StartMenuVC: UIViewController {
     
     func addMenuButtonToStackView() {
         
-        let arrayMenuButtons = [playButton, resultButton]
+        let arrayMenuButtons = [playButton, resultButton, settingsButton]
         for arrayMenuButton in arrayMenuButtons {
             arrayMenuButton.backgroundColor = AppColors.buttonsMenu
             arrayMenuButton.tintColor = .black
