@@ -71,7 +71,7 @@ final class StartMenuVC: UIViewController {
     }
     
     @objc func tapAddQuestionButton() {
-        let questionViewController = QuestionVC()
+        let questionViewController = AddQuestionVC()
         present(questionViewController, animated: true)
     }
     

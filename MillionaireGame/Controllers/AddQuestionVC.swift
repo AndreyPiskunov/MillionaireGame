@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class QuestionVC: UIViewController {
+final class AddQuestionVC: UIViewController {
     //MARK: - Properties
     
     private lazy var questionBackgroundView = UIView()

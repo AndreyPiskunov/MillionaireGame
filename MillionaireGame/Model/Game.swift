@@ -9,20 +9,33 @@ import Foundation
 
 final class Game {
     
-    static let shared = Game()
+    static let shared = Game()//singleton
     var session: GameSession?
     
+    private let resultCaretaker = ResultCaretaker()
+    private let questionCaretaker = QuestionCaretaker()
+    
     private(set) var results: [Result] {
-        didSet { resultCareTaker.saveResult(result: self.results)
+        didSet { resultCaretaker.saveResult(result: self.results)
         }
     }
     
-    private let resultCareTaker = ResultCaretaker()
-    private init() {
-        self.results = self.resultCareTaker.retrieveResult()
+    private(set) var questions: [Question] {
+        didSet { questionCaretaker.saveResult(result: self.questions)
+        }
     }
     
-    func saveResult(_ record: Result) {
-        self.results.append(record)
+    private init() {
+        self.results = self.resultCaretaker.retrieveResult()
+        self.questions = self.questionCaretaker.retrieveResult()
+    }
+    //MARK: - Methods
+    
+    func saveResult(_ result: Result) {
+        self.results.append(result)
+    }
+    
+    func saveResult(_ question: Question) {
+        self.questions.append(question)
     }
 }

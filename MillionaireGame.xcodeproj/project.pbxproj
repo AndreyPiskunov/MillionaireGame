@@ -25,7 +25,8 @@
 		CEB58FF9293B50B20090CF52 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB58FF8293B50B20090CF52 /* SettingsVC.swift */; };
 		CEB59005293E090C0090CF52 /* ObservableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB59004293E090C0090CF52 /* ObservableOptions.swift */; };
 		CEB59007293E09680090CF52 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB59006293E09680090CF52 /* Observable.swift */; };
-		CEB5900A293E5F590090CF52 /* QuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB59009293E5F590090CF52 /* QuestionVC.swift */; };
+		CEB5900A293E5F590090CF52 /* AddQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB59009293E5F590090CF52 /* AddQuestionVC.swift */; };
+		CEB5900D293E66230090CF52 /* QuestionCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5900C293E66230090CF52 /* QuestionCaretaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +50,8 @@
 		CEB58FF8293B50B20090CF52 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		CEB59004293E090C0090CF52 /* ObservableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableOptions.swift; sourceTree = "<group>"; };
 		CEB59006293E09680090CF52 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		CEB59009293E5F590090CF52 /* QuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionVC.swift; sourceTree = "<group>"; };
+		CEB59009293E5F590090CF52 /* AddQuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionVC.swift; sourceTree = "<group>"; };
+		CEB5900C293E66230090CF52 /* QuestionCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCaretaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,7 @@
 				CE47C6F829340357004DDCDD /* GameVC.swift */,
 				CE58E6A929352E6900D59B79 /* ResultVC.swift */,
 				CEB58FF8293B50B20090CF52 /* SettingsVC.swift */,
-				CEB59009293E5F590090CF52 /* QuestionVC.swift */,
+				CEB59009293E5F590090CF52 /* AddQuestionVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -131,7 +133,7 @@
 		CEB58FF7293B473F0090CF52 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				CE042AB1293A332B00D13551 /* ResultCaretaker.swift */,
+				CEB5900B293E65D10090CF52 /* Caretakers */,
 				CEB59008293E15600090CF52 /* Observer */,
 			);
 			path = Utils;
@@ -144,6 +146,15 @@
 				CEB59004293E090C0090CF52 /* ObservableOptions.swift */,
 			);
 			path = Observer;
+			sourceTree = "<group>";
+		};
+		CEB5900B293E65D10090CF52 /* Caretakers */ = {
+			isa = PBXGroup;
+			children = (
+				CEB5900C293E66230090CF52 /* QuestionCaretaker.swift */,
+				CE042AB1293A332B00D13551 /* ResultCaretaker.swift */,
+			);
+			path = Caretakers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,13 +229,14 @@
 			files = (
 				CEB59007293E09680090CF52 /* Observable.swift in Sources */,
 				CE042AB6293A7B5B00D13551 /* Questions.swift in Sources */,
+				CEB5900D293E66230090CF52 /* QuestionCaretaker.swift in Sources */,
 				CE8D2FF12938DC08007AD5A6 /* Result.swift in Sources */,
 				CEB58FF9293B50B20090CF52 /* SettingsVC.swift in Sources */,
 				CEB59005293E090C0090CF52 /* ObservableOptions.swift in Sources */,
 				CE47C6F72934033D004DDCDD /* StartMenuVC.swift in Sources */,
 				CE042AB2293A332B00D13551 /* ResultCaretaker.swift in Sources */,
 				CE042AB4293A7AF500D13551 /* Answer.swift in Sources */,
-				CEB5900A293E5F590090CF52 /* QuestionVC.swift in Sources */,
+				CEB5900A293E5F590090CF52 /* AddQuestionVC.swift in Sources */,
 				CE58E6AA29352E6900D59B79 /* ResultVC.swift in Sources */,
 				CE8D2FF329390A9B007AD5A6 /* AppColors.swift in Sources */,
 				CE58E6AE2937C30500D59B79 /* GameSession.swift in Sources */,
