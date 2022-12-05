@@ -15,6 +15,7 @@ final class StartMenuVC: UIViewController {
     private lazy var resultButton = UIButton()
     private lazy var buttonStack = UIStackView()
     private lazy var settingsButton = UIButton()
+    private lazy var addQuestionButton = UIButton()
     
     //MARK: - Lifecycle
     
@@ -47,6 +48,10 @@ final class StartMenuVC: UIViewController {
         settingsButton.setTitle("Настройки", for: .normal)
         settingsButton.addTarget(self, action: #selector(tapSettingsButton), for: .touchUpInside)
         view.addSubview(settingsButton)
+        
+        addQuestionButton.setTitle("Добавить вопрос", for: .normal)
+        addQuestionButton.addTarget(self, action: #selector(tapAddQuestionButton), for: .touchUpInside)
+        view.addSubview(addQuestionButton)
     }
     
     @objc func tapPlayButton() {
@@ -61,8 +66,13 @@ final class StartMenuVC: UIViewController {
     }
     
     @objc func tapSettingsButton() {
-        let settingsViewController = SettingsMenuVC()
+        let settingsViewController = SettingsVC()
         present(settingsViewController, animated: true)
+    }
+    
+    @objc func tapAddQuestionButton() {
+        let questionViewController = QuestionVC()
+        present(questionViewController, animated: true)
     }
     
     func setupButtonStackView() {
@@ -78,7 +88,7 @@ final class StartMenuVC: UIViewController {
     
     func addMenuButtonToStackView() {
         
-        let arrayMenuButtons = [playButton, resultButton, settingsButton]
+        let arrayMenuButtons = [playButton, resultButton, settingsButton, addQuestionButton]
         for arrayMenuButton in arrayMenuButtons {
             arrayMenuButton.backgroundColor = AppColors.buttonsMenu
             arrayMenuButton.tintColor = .black
@@ -95,6 +105,6 @@ final class StartMenuVC: UIViewController {
         buttonStack.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         buttonStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
         buttonStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40).isActive = true
-        buttonStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -300).isActive = true
+        buttonStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -220).isActive = true
     }
 }

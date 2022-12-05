@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingsMenuVC: UIViewController {
+final class SettingsVC: UIViewController {
     //MARK: - Properties
     
     private lazy var settingsBackgroundView = UIView()
