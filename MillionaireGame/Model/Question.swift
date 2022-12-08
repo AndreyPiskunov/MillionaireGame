@@ -9,5 +9,5 @@ import Foundation
 
 struct Question: Codable {
     let question: String
-    let aunswers: [Answer]
+    let answers: [Answer]
 }

@@ -15,23 +15,23 @@ final class QuestionCaretaker {
     private let key = "question"
     //MARK: - Methods
     
-    func saveResult(result: [Question]) {
+    func saveQuestions(question: [Question]) {
         do {
-            let data = try encoder.encode(result)
+            let data = try encoder.encode(question)
             UserDefaults.standard.set(data, forKey: key)
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
     }
     
-    func retrieveResult() -> [Question] {
+    func retrieveQuestion() -> [Question] {
         guard let data = UserDefaults.standard.data(forKey: key) else {
             return []
         }
         do {
             return try decoder.decode([Question].self, from: data)
         } catch  {
-            print(error.localizedDescription)
+            print(error)
             return []
         }
     }

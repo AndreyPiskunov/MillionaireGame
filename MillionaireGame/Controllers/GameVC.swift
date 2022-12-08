@@ -20,7 +20,7 @@ final class GameVC: UIViewController {
     private lazy var progressLabel = UILabel()
     
     let session = GameSession()
-    let questions = Questions.testQuestions
+    let questions = testQuestions
     var truth = ""
     //MARK: - Lifecycle
     
@@ -140,13 +140,13 @@ final class GameVC: UIViewController {
         var answerNum = 0
         answerStack.subviews.forEach { button in
             guard let button = button as? UIButton else { return }
-            button.setTitle(question.aunswers[answerNum].text, for: .normal)
+            button.setTitle(question.answers[answerNum].text, for: .normal)
             answerNum += 1
         }
     }
     
     private func setTruth(_ questionNumber: Int) {
-        let answers = questions[questionNumber].aunswers
+        let answers = questions[questionNumber].answers
         answers.forEach { answer in
             if answer.truth {
                 truth = answer.text

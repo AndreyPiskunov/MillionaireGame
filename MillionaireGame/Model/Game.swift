@@ -10,10 +10,11 @@ import Foundation
 final class Game {
     
     static let shared = Game()//singleton
-    var session: GameSession?
     
     private let resultCaretaker = ResultCaretaker()
     private let questionCaretaker = QuestionCaretaker()
+    
+    var session: GameSession?
     
     private(set) var results: [Result] {
         didSet { resultCaretaker.saveResult(result: self.results)
@@ -21,13 +22,14 @@ final class Game {
     }
     
     private(set) var questions: [Question] {
-        didSet { questionCaretaker.saveResult(result: self.questions)
+        didSet { questionCaretaker.saveQuestions(question: self.questions)
         }
     }
     
     private init() {
         self.results = self.resultCaretaker.retrieveResult()
-        self.questions = self.questionCaretaker.retrieveResult()
+        self.questions = self.questionCaretaker.retrieveQuestion()
+        testQuestions += self.questions
     }
     //MARK: - Methods
     
@@ -35,7 +37,7 @@ final class Game {
         self.results.append(result)
     }
     
-    func saveResult(_ question: Question) {
+    func saveQuestions(_ question: Question) {
         self.questions.append(question)
     }
 }
