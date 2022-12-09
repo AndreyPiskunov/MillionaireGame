@@ -44,7 +44,23 @@ final class AddQuestionVC: UIViewController {
         setupSegmentedControl()
         setupAddButton()
         setupTruthControllConstrains()
+        
+        questionTextField.delegate = self
+        answerA.delegate = self
+        answerB.delegate = self
+        answerC.delegate = self
+        answerD.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWasShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+    }
+    
     //MARK: - Methods
     
     func setupQuestionBackgroundView() {
@@ -144,6 +160,7 @@ final class AddQuestionVC: UIViewController {
         truthControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40).isActive = true
         truthControl.topAnchor.constraint(equalTo: answerStackView.bottomAnchor, constant: 40).isActive = true
     }
+    
     func setupAnswerStackViewConstrains() {
         
         answerStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -155,5 +172,34 @@ final class AddQuestionVC: UIViewController {
     @objc func tapAddButton(sender: UIButton!) {
         addNewQuestion()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func keyboardWasShow(notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
+        _ = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
+    }
+}
+
+extension AddQuestionVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == questionTextField {
+            answerA.becomeFirstResponder()
+        } else {
+            if textField == answerA {
+                answerB.becomeFirstResponder()
+            } else {
+                if textField == answerB {
+                    answerC.becomeFirstResponder()
+                } else {
+                    if textField == answerC {
+                        answerD.becomeFirstResponder()
+                    }
+                }
+            }
+        }
+        return true
     }
 }
