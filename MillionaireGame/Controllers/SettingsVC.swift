@@ -10,21 +10,39 @@ import UIKit
 final class SettingsVC: UIViewController {
     //MARK: - Properties
     
-    private lazy var settingsBackgroundView = UIView()
+    private lazy var settingsTableView = UITableView()
+    private lazy var switchOnOff = UISwitch()
+    private lazy var label = UILabel()
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSettingsBackgroundView()
+        view.addSubview(settingsTableView)
+        settingsTableView.delegate = self
+        settingsTableView.dataSource = self
     }
-    //MARK: - Methods
     
-    func setupSettingsBackgroundView() {
-        
-        settingsBackgroundView = UIView(frame: self.view.bounds)
-        settingsBackgroundView.backgroundColor = AppColors.backgroundSubMenu
-        view.addSubview(settingsBackgroundView)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        settingsTableView.frame = view.bounds
+        settingsTableView.separatorColor = .white
+        settingsTableView.rowHeight = 60
+    }
+}
+   
+extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = "Случайный порядок"
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        cell.accessoryView = switchOnOff
+        return cell
     }
 }
