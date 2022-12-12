@@ -16,6 +16,8 @@ final class Game {
     
     var session: GameSession?
     
+    var random: Random = .off
+    
     private(set) var results: [Result] {
         didSet { resultCaretaker.saveResult(result: self.results)
         }

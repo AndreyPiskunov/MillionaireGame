@@ -66,7 +66,7 @@ final class AddQuestionVC: UIViewController {
     func setupQuestionBackgroundView() {
         
         questionBackgroundView.frame.size = contentSize
-        questionBackgroundView.backgroundColor = .lightGray
+        questionBackgroundView.backgroundColor = .gray
     }
     
     func setupAddButton() {

@@ -14,6 +14,12 @@ protocol GameVCDelegate: AnyObject {
 
 class GameSession {
     
+    var showQuestions: ShowQuestionStrategy
+    
+    init(showQuestions: ShowQuestionStrategy) {
+        self.showQuestions = showQuestions
+    }
+    
     weak var gameVCDelegate: GameVCDelegate?
     
     var numberQuestion = Observable<Int>(0)

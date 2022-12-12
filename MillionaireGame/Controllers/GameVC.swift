@@ -19,13 +19,31 @@ final class GameVC: UIViewController {
     private lazy var questionLabel = UILabel()
     private lazy var progressLabel = UILabel()
     
-    let session = GameSession()
-    let questions = testQuestions
-    var truth = ""
+    var session: GameSession!
+    var questions: [Question]!
+    var truth: String!
+    var random: Random!
+    
+    private var showQuestionStrategy: ShowQuestionStrategy {
+        switch self.random {
+        case .off:
+            return DefaultQuestions()
+        case .on:
+            return RandomQuestions()
+        case .none:
+            return DefaultQuestions()
+        }
+    }
+
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        session = GameSession(showQuestions: showQuestionStrategy)
+        session.gameVCDelegate = self
+        Game.shared.session = session
+        
+        questions = session.showQuestions.showQuestions(questions: testQuestions)
         
         session.numberQuestion.addObserver(self,
                                            options: [.new, .initial],
@@ -37,9 +55,6 @@ final class GameVC: UIViewController {
             }
             self?.progressLabel.text = "Прогресс: \(numberQuestion) (\(percent)%)" }
         )
-        
-        session.gameVCDelegate = self
-        Game.shared.session = session
         
         setAllQuestionsCount(questions.count)
         

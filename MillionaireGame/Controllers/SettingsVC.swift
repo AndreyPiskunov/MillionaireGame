@@ -11,9 +11,21 @@ final class SettingsVC: UIViewController {
     //MARK: - Properties
     
     private lazy var settingsTableView = UITableView()
-    private lazy var switchOnOff = UISwitch()
-    private lazy var label = UILabel()
+    private lazy var switchOnOff: UISwitch = {
+        let switchOnOff = UISwitch()
+        switchOnOff.addTarget(self, action: #selector(didChangeSwitchValue), for: .valueChanged)
+        return switchOnOff
+    }()
     
+    private lazy var label = UILabel()
+    private var selectedRandom: Random {
+        switch self.switchOnOff.isOn {
+        case false:
+            return .off
+        case true:
+            return .on
+        }
+    }
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -22,6 +34,7 @@ final class SettingsVC: UIViewController {
         view.addSubview(settingsTableView)
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -30,8 +43,15 @@ final class SettingsVC: UIViewController {
         settingsTableView.separatorColor = .white
         settingsTableView.rowHeight = 60
     }
+    
+    @objc func didChangeSwitchValue() {
+        if switchOnOff.isOn {
+            print("ON")
+        } else {
+            print("OFF")
+        }
+    }
 }
-   
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +63,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = "Случайный порядок"
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         cell.accessoryView = switchOnOff
+
         return cell
     }
 }

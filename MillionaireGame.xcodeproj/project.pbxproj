@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0332DB2944D7230022C8E7 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0332DA2944D7230022C8E7 /* Random.swift */; };
+		CE0332DE2944DC910022C8E7 /* ShowQuestionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0332DD2944DC910022C8E7 /* ShowQuestionStrategy.swift */; };
+		CE0332E02944E1100022C8E7 /* RandomQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0332DF2944E1100022C8E7 /* RandomQuestions.swift */; };
+		CE0332E22944E29D0022C8E7 /* DefaultQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0332E12944E29D0022C8E7 /* DefaultQuestions.swift */; };
 		CE042AB2293A332B00D13551 /* ResultCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE042AB1293A332B00D13551 /* ResultCaretaker.swift */; };
 		CE042AB4293A7AF500D13551 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE042AB3293A7AF500D13551 /* Answer.swift */; };
 		CE042AB6293A7B5B00D13551 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE042AB5293A7B5B00D13551 /* Questions.swift */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE0332DA2944D7230022C8E7 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		CE0332DD2944DC910022C8E7 /* ShowQuestionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQuestionStrategy.swift; sourceTree = "<group>"; };
+		CE0332DF2944E1100022C8E7 /* RandomQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomQuestions.swift; sourceTree = "<group>"; };
+		CE0332E12944E29D0022C8E7 /* DefaultQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuestions.swift; sourceTree = "<group>"; };
 		CE042AB1293A332B00D13551 /* ResultCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCaretaker.swift; sourceTree = "<group>"; };
 		CE042AB3293A7AF500D13551 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		CE042AB5293A7B5B00D13551 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
@@ -65,6 +73,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE0332DC2944DC2C0022C8E7 /* Strategy */ = {
+			isa = PBXGroup;
+			children = (
+				CE0332DA2944D7230022C8E7 /* Random.swift */,
+				CE0332DD2944DC910022C8E7 /* ShowQuestionStrategy.swift */,
+				CE0332DF2944E1100022C8E7 /* RandomQuestions.swift */,
+				CE0332E12944E29D0022C8E7 /* DefaultQuestions.swift */,
+			);
+			path = Strategy;
+			sourceTree = "<group>";
+		};
 		CE47C6D22933E5C0004DDCDD = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +152,7 @@
 		CEB58FF7293B473F0090CF52 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE0332DC2944DC2C0022C8E7 /* Strategy */,
 				CEB5900B293E65D10090CF52 /* Caretakers */,
 				CEB59008293E15600090CF52 /* Observer */,
 			);
@@ -229,6 +249,8 @@
 			files = (
 				CEB59007293E09680090CF52 /* Observable.swift in Sources */,
 				CE042AB6293A7B5B00D13551 /* Questions.swift in Sources */,
+				CE0332DE2944DC910022C8E7 /* ShowQuestionStrategy.swift in Sources */,
+				CE0332E22944E29D0022C8E7 /* DefaultQuestions.swift in Sources */,
 				CEB5900D293E66230090CF52 /* QuestionCaretaker.swift in Sources */,
 				CE8D2FF12938DC08007AD5A6 /* Result.swift in Sources */,
 				CEB58FF9293B50B20090CF52 /* SettingsVC.swift in Sources */,
@@ -239,10 +261,12 @@
 				CEB5900A293E5F590090CF52 /* AddQuestionVC.swift in Sources */,
 				CE58E6AA29352E6900D59B79 /* ResultVC.swift in Sources */,
 				CE8D2FF329390A9B007AD5A6 /* AppColors.swift in Sources */,
+				CE0332E02944E1100022C8E7 /* RandomQuestions.swift in Sources */,
 				CE58E6AE2937C30500D59B79 /* GameSession.swift in Sources */,
 				CE58E6AC2937C0A800D59B79 /* Game.swift in Sources */,
 				CE47C6F42933F944004DDCDD /* Question.swift in Sources */,
 				CE47C6DF2933E5C1004DDCDD /* AppDelegate.swift in Sources */,
+				CE0332DB2944D7230022C8E7 /* Random.swift in Sources */,
 				CE47C6F929340357004DDCDD /* GameVC.swift in Sources */,
 				CE47C6E12933E5C1004DDCDD /* SceneDelegate.swift in Sources */,
 			);
