@@ -17,29 +17,56 @@ final class GameVC: UIViewController {
     private lazy var answerButtonC = UIButton()
     private lazy var answerButtonD = UIButton()
     private lazy var questionLabel = UILabel()
+    private lazy var progressLabel = UILabel()
     
-    let session = GameSession()
-    let questions = Questions.testQuestions
-    var questionNumber = 0
-    var truth = ""
+    var session: GameSession!
+    var questions: [Question]!
+    var truth: String!
+    var random: Random!
+    
+    private var showQuestionStrategy: ShowQuestionStrategy {
+        switch self.random {
+        case .off:
+            return DefaultQuestions()
+        case .on:
+            return RandomQuestions()
+        case .none:
+            return DefaultQuestions()
+        }
+    }
+
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        session = GameSession(showQuestions: showQuestionStrategy)
         session.gameVCDelegate = self
         Game.shared.session = session
+        
+        questions = session.showQuestions.showQuestions(questions: testQuestions)
+        
+        session.numberQuestion.addObserver(self,
+                                           options: [.new, .initial],
+                                           closure: { [weak self] (numberQuestion, _) in
+            var percent: Float = 0
+            if self?.session.percentProgress.isNaN == false {
+                percent = (self?.session.percentProgress)!
+                
+            }
+            self?.progressLabel.text = "Прогресс: \(numberQuestion) (\(percent)%)" }
+        )
         
         setAllQuestionsCount(questions.count)
         
         setupGameBackgroundView()
+        setupProgressLabel()
         setupQuestionLabel()
         setupAnswerStackView()
         
         setActionForButtons()
-        setTextQuestion(questionNumber)
-        setTextButtons(questionNumber)
-        setTruth(questionNumber)
+        setTextQuestion(session.numberQuestion.value)
+        setTextButtons(session.numberQuestion.value)
+        setTruth(session.numberQuestion.value)
     }
     //MARK: - Methods
     
@@ -50,11 +77,21 @@ final class GameVC: UIViewController {
         view.addSubview(gameBackgroundView)
     }
     
+    func setupProgressLabel() {
+        progressLabel.font = UIFont.systemFont(ofSize: 20)
+        progressLabel.textAlignment = .center
+        progressLabel.textColor = .systemGreen
+        progressLabel.numberOfLines = 0
+        view.addSubview(progressLabel)
+        
+        setupProgressLabelConstraints()
+    }
+    
     func setupQuestionLabel() {
         
-        questionLabel.font = UIFont.systemFont(ofSize: 28)
+        questionLabel.font = UIFont.systemFont(ofSize: 28, weight: .medium)
         questionLabel.textAlignment = .center
-        questionLabel.textColor = AppColors.textQestion
+        questionLabel.textColor = .systemYellow
         questionLabel.numberOfLines = 0
         view.addSubview(questionLabel)
         
@@ -81,6 +118,13 @@ final class GameVC: UIViewController {
             arrayButton.layer.cornerRadius = 12
             answerStack.addArrangedSubview(arrayButton)
         }
+    }
+    
+    func setupProgressLabelConstraints() {
+        progressLabel.translatesAutoresizingMaskIntoConstraints = false
+        progressLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        progressLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        progressLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
     }
     
     func setupQuestionLabelConstraints() {
@@ -111,13 +155,13 @@ final class GameVC: UIViewController {
         var answerNum = 0
         answerStack.subviews.forEach { button in
             guard let button = button as? UIButton else { return }
-            button.setTitle(question.aunswers[answerNum].text, for: .normal)
+            button.setTitle(question.answers[answerNum].text, for: .normal)
             answerNum += 1
         }
     }
     
     private func setTruth(_ questionNumber: Int) {
-        let answers = questions[questionNumber].aunswers
+        let answers = questions[questionNumber].answers
         answers.forEach { answer in
             if answer.truth {
                 truth = answer.text
@@ -143,16 +187,16 @@ final class GameVC: UIViewController {
     }
     
     private func nextQuestions() {
-        questionNumber += 1
-        guard questionNumber < questions.count else { endGame(); return }
-        setTextQuestion(questionNumber)
-        setTextButtons(questionNumber)
-        setTruth(questionNumber)
+        session.numberQuestion.value += 1
+        guard session.numberQuestion.value < questions.count else { endGame(); return }
+        setTextQuestion(session.numberQuestion.value)
+        setTextButtons(session.numberQuestion.value)
+        setTruth(session.numberQuestion.value)
     }
     
     private func endGame() {
-        let result = Result(counterCorrectAnswers: session.counterCorrectAnswers,
-                            counterAllQuestions: session.counterAllQuestions)
+        let result = Result(counterCorrectAnswers: session.numberQuestion.value,
+                            counterAllQuestions: session.allQuestionsCount)
         Game.shared.saveResult(result)
         Game.shared.session = nil
         self.dismiss(animated: true, completion: nil)
@@ -161,10 +205,10 @@ final class GameVC: UIViewController {
 
 extension GameVC: GameVCDelegate {
     func scorePoints(_ points: Int = 1) {
-        session.counterCorrectAnswers += points
+        session.points += points
     }
     
     func setAllQuestionsCount(_ count: Int) {
-        session.counterAllQuestions = count
+        session.allQuestionsCount = count
     }
 }

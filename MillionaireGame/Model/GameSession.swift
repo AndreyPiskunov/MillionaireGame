@@ -14,9 +14,18 @@ protocol GameVCDelegate: AnyObject {
 
 class GameSession {
     
+    var showQuestions: ShowQuestionStrategy
+    
+    init(showQuestions: ShowQuestionStrategy) {
+        self.showQuestions = showQuestions
+    }
+    
     weak var gameVCDelegate: GameVCDelegate?
     
-    var counterCorrectAnswers: Int = 0
-    var counterAllQuestions: Int = 0
-    
+    var numberQuestion = Observable<Int>(0)
+    var points = 0
+    var allQuestionsCount = 0
+    var percentProgress: Float {
+        (Float(self.numberQuestion.value) / Float(self.allQuestionsCount) * 100).rounded()
+    }
 }
