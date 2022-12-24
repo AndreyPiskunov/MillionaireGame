@@ -11,21 +11,13 @@ final class SettingsVC: UIViewController {
     //MARK: - Properties
     
     private lazy var settingsTableView = UITableView()
+    private lazy var label = UILabel()
     private lazy var switchOnOff: UISwitch = {
         let switchOnOff = UISwitch()
         switchOnOff.addTarget(self, action: #selector(didChangeSwitchValue), for: .valueChanged)
         return switchOnOff
     }()
-    
-    private lazy var label = UILabel()
-    private var selectedRandom: Random {
-        switch self.switchOnOff.isOn {
-        case false:
-            return .off
-        case true:
-            return .on
-        }
-    }
+   
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -34,24 +26,22 @@ final class SettingsVC: UIViewController {
         view.addSubview(settingsTableView)
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
-        
+        switchOnOff.isOn = UserDefaults.standard.bool(forKey: "Random") 
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         settingsTableView.frame = view.bounds
         settingsTableView.separatorColor = .white
         settingsTableView.rowHeight = 60
     }
     
     @objc func didChangeSwitchValue() {
-        if switchOnOff.isOn {
-            print("ON")
-        } else {
-            print("OFF")
-        }
+        UserDefaults.standard.set(switchOnOff.isOn, forKey: "Random")
     }
 }
+
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

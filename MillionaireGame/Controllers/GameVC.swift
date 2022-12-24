@@ -22,7 +22,7 @@ final class GameVC: UIViewController {
     var session: GameSession!
     var questions: [Question]!
     var truth: String!
-    var random: Random!
+    var random: Random = .off
     
     private var showQuestionStrategy: ShowQuestionStrategy {
         switch self.random {
@@ -30,8 +30,6 @@ final class GameVC: UIViewController {
             return DefaultQuestions()
         case .on:
             return RandomQuestions()
-        case .none:
-            return DefaultQuestions()
         }
     }
 
@@ -39,25 +37,29 @@ final class GameVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        let randomMode = UserDefaults.standard.bool(forKey: "Random")
+        if randomMode {
+            random = .on
+        } else {
+            random = .off
+        }
+        
         session = GameSession(showQuestions: showQuestionStrategy)
         session.gameVCDelegate = self
-        Game.shared.session = session
-        
         questions = session.showQuestions.showQuestions(questions: testQuestions)
-        
+        Game.shared.session = session
         session.numberQuestion.addObserver(self,
                                            options: [.new, .initial],
                                            closure: { [weak self] (numberQuestion, _) in
             var percent: Float = 0
             if self?.session.percentProgress.isNaN == false {
                 percent = (self?.session.percentProgress)!
-                
             }
             self?.progressLabel.text = "Прогресс: \(numberQuestion) (\(percent)%)" }
         )
         
         setAllQuestionsCount(questions.count)
-        
         setupGameBackgroundView()
         setupProgressLabel()
         setupQuestionLabel()
@@ -68,6 +70,7 @@ final class GameVC: UIViewController {
         setTextButtons(session.numberQuestion.value)
         setTruth(session.numberQuestion.value)
     }
+    
     //MARK: - Methods
     
     func setupGameBackgroundView() {
